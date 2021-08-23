@@ -1,0 +1,13 @@
+<!-- Author: Ondrej Deingruber -->
+<launch>
+    <node name="accelerometer_driver" pkg="driver_mpu9250" type="driver_mpu9250_rpi" ns="fit_bot">
+        <param name="i2c_bus" value="1" />
+        <param name="i2c_adress" value="0x68" />
+        <param name="interrupt_gpio_pin" value="18" />
+        <param name="gyro_dlpf_frequency" value="2" />
+        <param name="accel_dlpf_frequency" value="2" />
+        <param name="gyro_fsr" value="0" />
+        <param name="accel_fsr" value="0" />
+        <param name="max_data_rate" value="4000" />
+    </node>
+</launch>

@@ -1,0 +1,24 @@
+<!-- Author: Ondrej Deingruber -->
+<launch>
+    <node pkg="move_base" type="move_base" respawn="false" name="move_base" ns="fit_bot" output="screen">
+        <!-- load config files -->
+        <rosparam file="$(find fit_bot)/config/costmap_common_params.yaml" command="load" ns="global_costmap" /> 
+        <rosparam file="$(find fit_bot)/config/costmap_common_params.yaml" command="load" ns="local_costmap" />
+        <rosparam file="$(find fit_bot)/config/local_costmap_params.yaml" command="load" />
+        <rosparam file="$(find fit_bot)/config/global_costmap_params.yaml" command="load" /> 
+        <rosparam file="$(find fit_bot)/config/local_planner.yaml" command="load" />
+
+        <!-- set local planner -->
+        <param name = "base_local_planner" value = "teb_local_planner/TebLocalPlannerROS"/>
+        <!-- set costmap converter -->
+        <rosparam file="$(find fit_bot)/config/costmap_converter_params.yaml" command="load" />
+
+        <!-- params -->
+        <param name="clearing_rotation_allowed" value="false" />
+        <param name="controller_frequency" value="5.0" />
+        <param name="planner_frequency" value="0.5" />
+
+        <!-- remap comd_vel topic -->
+        <remap from="/fit_bot/cmd_vel" to="/fit_bot/mobile_base_controller/cmd_vel"/>
+    </node>
+</launch>

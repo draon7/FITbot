@@ -1,0 +1,4 @@
+<!-- Author: Ondrej Deingruber -->
+<launch>
+    <node pkg="robot_driver_gpio" type="robot_driver_gpio_node" name="robot_driver_gpio_node" ns = "fit_bot"/>
+</launch>

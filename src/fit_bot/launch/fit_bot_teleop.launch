@@ -1,0 +1,16 @@
+<!-- Author: Ondrej Deingruber -->
+<launch>
+  <!-- <include file="$(find fit_bot)/launch/joint_state_publisher.launch" /> -->
+  <include file="$(find fit_bot)/launch/robot_gpio_driver.launch" />
+  <include file="$(find fit_bot)/launch/motor_pid.launch" />
+  <include file="$(find fit_bot)/launch/ros_control.launch" />
+  <include file="$(find fit_bot)/launch/robot_state_publisher.launch" />
+  <include file="$(find fit_bot)/launch/MPU_driver.launch" />
+  <include file="$(find fit_bot)/launch/imu_filter.launch" />
+  <!-- <include file="$(find fit_bot)/launch/imu_complementary_filter.launch" /> -->
+  <include file="$(find fit_bot)/launch/robot_localization.launch" />
+  <include file="$(find fit_bot)/launch/rplidar.launch" />
+  <include file="$(find fit_bot)/launch/hector_slam.launch" />
+  <!-- <include file="$(find fit_bot)/launch/navigation.launch" /> -->
+  <include file="$(find fit_bot)/launch/usb_cam.launch" />
+</launch>

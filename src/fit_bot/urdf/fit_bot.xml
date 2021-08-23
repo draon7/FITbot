@@ -1,0 +1,89 @@
+<robot name="fit_bot">
+    <link name="base_footprint" />
+    <link name="base_stabilized" />
+    <!-- base footprint have z of bottom of the vehicle -->
+    <link name="base_link" />
+    <link name="base_laser" />
+    <link name="base_imu" />
+    <link name="imaginary_center_front_wheel_steering" />
+    <link name="imaginary_center_back_wheel" />
+    <link name="base_camera" />
+
+    <!-- joints -->
+
+    <!-- base stabilized -->
+    <joint name="base_footprint_to_base_stabilized" type="fixed">
+        <parent link="base_footprint" />
+        <child link="base_stabilized" />
+        <origin rpy="0 0 0" xyz="0 0 0.025" />
+    </joint>
+
+    <!-- base link -->
+    <joint name="base_stabilized_to_base_link" type="fixed">
+        <parent link="base_stabilized" />
+        <child link="base_link" />
+        <origin rpy="0 0 0" xyz="0 0 0" />
+    </joint>
+
+    <!-- base laser -->
+    <joint name="base_link_to_base_laser" type="fixed">
+        <parent link="base_link" />
+        <child link="base_laser" />
+        <origin rpy="0 0 0" xyz="0.08 0 0.14" />
+    </joint>
+
+    <!-- front wheel steering joint -->
+    <joint name="imaginary_center_front_wheel_steering_joint" type="revolute">
+        <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+        <parent link="base_link" />
+        <child link="imaginary_center_front_wheel_steering" />
+        <origin rpy="0 0 0" xyz="0.16 0 0.14" />
+        <axis xyz="0.0 0.0 1.0"/>
+        <limit lower="-0.628319" upper="0.628319" effort="0.072" velocity="1.1"/> <!-- -36 deg to 36 deg, 1.8 kg/cm / 2.5, servo 60deg-0.12s 2.75/2.5-->
+    </joint>
+
+    <!-- center back wheel joint -->
+    <joint name="imaginary_center_back_wheel_joint" type="continuous">
+        <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+        <parent link="base_link" />
+        <child link="imaginary_center_back_wheel" />
+        <origin xyz="0.0 0.0 0.0" />
+        <axis xyz="0.0 1.0 0.0"/>
+        <limit effort="0.72" velocity="6.2832"/>
+    </joint>
+
+    <!-- base imu -->
+    <joint name="base_link_base_imu" type="fixed">
+        <origin xyz="0.0 0.0 0.095" rpy="0.0 0.0 0.0"/>
+        <parent link="base_link"/>
+        <child link="base_imu"/>
+    </joint>
+
+    <!-- base camera -->
+    <joint name="base_link_base_camera" type="fixed">
+        <origin xyz="0.1947 0.0 0.0472" rpy="3.1416 0 0"/>
+        <parent link="base_link"/>
+        <child link="base_camera"/>
+    </joint>    
+
+
+    <!-- transmissions -->
+    <!-- imaginary_center_front_wheel_steering_joint -->
+    <transmission name="imaginary_center_front_wheel_steering_joint_trans">
+        <type>transmission_interface/SimpleTransmission</type>
+        <actuator name="imaginary_center_front_wheel_steering_actuator" />
+        <joint name="imaginary_center_front_wheel_steering_joint">
+            <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+        </joint>
+    </transmission>
+    <!-- imaginary_center_back_wheel -->
+    <transmission name="imaginary_center_back_wheel_trans">
+        <type>transmission_interface/SimpleTransmission</type>
+        <actuator name="imaginary_center_back_wheel_actuator">
+        </actuator>
+        <joint name="imaginary_center_back_wheel_joint">
+            <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+        </joint>
+    </transmission>
+
+</robot>

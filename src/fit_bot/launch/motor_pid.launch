@@ -1,0 +1,21 @@
+<!-- Author: Ondrej Deingruber -->
+<launch>
+    <node name="main_motor_pid" pkg="pid" type="controller" ns="fit_bot" >
+        <param name="Kp" value="0.175" />
+        <param name="Ki" value="0.7" />
+        <param name="Kd" value="0.001542" />
+        <param name="upper_limit" value="1" />
+        <param name="lower_limit" value="-1" />
+        <param name="windup_limit" value="1" />
+        <param name="max_loop_frequency" value="30.0" />
+        <param name="min_loop_frequency" value="30.0" />
+        <param name="topic_from_controller" value="/fit_bot/main_motor_set_speed" />
+        <param name="topic_from_plant" value="/fit_bot/main_motor_speed" />
+        <param name="setpoint_topic" value="/fit_bot/main_motor_set_speed_pid" />
+        <param name="cutoff_frequency" value="5" />
+        <param name="setpoint_timeout" value="0.5" />
+    </node>
+    <!-- <node name="rqt_plot" pkg="rqt_plot" type="rqt_plot" args="/main_motor_set_speed/data /main_motor_speed/data /main_motor_set_speed_pid/data" />
+
+    <node name="rqt_reconfigure" pkg="rqt_reconfigure" type="rqt_reconfigure" /> -->
+</launch>

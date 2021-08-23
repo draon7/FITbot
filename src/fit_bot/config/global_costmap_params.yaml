@@ -1,0 +1,9 @@
+# author: Ondrej Deingruber
+global_costmap:
+  global_frame: map
+  robot_base_frame: base_footprint
+  update_frequency: 2.0
+
+  plugins:
+  - {name: static_layer, type: "costmap_2d::StaticLayer"}
+  - {name: inflater_layer, type: "costmap_2d::InflationLayer"}

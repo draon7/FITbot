@@ -1,0 +1,6 @@
+<!-- Author: Ondrej Deingruber -->
+<launch>
+    <param name="robot_description" command="cat $(find fit_bot)/urdf/fit_bot.xml" />
+    <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher">
+    </node>
+</launch>

@@ -1,0 +1,6 @@
+<!-- Author: Ondrej Deingruber -->
+<launch>
+    <node name="robot_localization" pkg="robot_localization" type="ekf_localization_node" ns="fit_bot">
+        <rosparam command="load" file="$(find fit_bot)/config/ekf_localization.yaml" />
+    </node>
+</launch>

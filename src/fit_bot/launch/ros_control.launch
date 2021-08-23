@@ -1,0 +1,14 @@
+<!-- Author: Ondrej Deingruber -->
+<launch>
+    <node name="ros_control_hw_interface" pkg="fit_bot_ros_control" type="fit_bot_ros_control_node" respawn="false"
+        output="screen" ns="/fit_bot" />
+                
+                
+        <!-- Load joint controller configurations from YAML file to parameter server -->
+        <rosparam file="$(find fit_bot)/config/fit_bot.yaml" command="load"/>
+
+        <!-- load the controllers -->
+        <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
+        output="screen" ns="/fit_bot" args="joint_state_controller mobile_base_controller"/>
+</launch>
+<!-- center_front_wheel_position_controller center_back_wheel_controller mobile_base_controller joint_position_controller joint_velocity_controller-->
